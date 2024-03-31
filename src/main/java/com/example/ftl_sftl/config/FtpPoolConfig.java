@@ -3,12 +3,12 @@ package com.example.ftl_sftl.config;
 import com.example.ftl_sftl.ftpClient.FtpClient;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
-public class FtpPoolConfig extends GenericObjectPoolConfig<FtpClient> {
+public class FtpPoolConfig extends GenericObjectPoolConfig {
 
-    private String host;
+    private String host = "192.168.0.102";
     private int port = 21;
-    private String username;
-    private String password;
+    private String username = "admin";
+    private String password = "admin";
     private int connectTimeOut = 5000;
     private String controlEncoding = "utf-8";
     private int bufferSize = 1024;

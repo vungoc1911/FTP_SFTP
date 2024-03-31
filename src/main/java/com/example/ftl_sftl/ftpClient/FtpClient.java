@@ -15,7 +15,7 @@ public class FtpClient implements Client {
     public void connect() {
         try {
             ftpClient = new FTPClient();
-            ftpClient.connect("10.15.175.20", 21);
+            ftpClient.connect("192.168.0.102", 21);
             verify();
             ftpClient.login("admin", "admin");
             verify();

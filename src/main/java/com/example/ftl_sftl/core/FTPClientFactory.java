@@ -4,12 +4,10 @@ import com.example.ftl_sftl.config.FtpPoolConfig;
 import com.example.ftl_sftl.exception.ClientException;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;
-import org.apache.commons.net.ftp.FTPSClient;
 import org.apache.commons.pool2.BasePooledObjectFactory;
 import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.log4j.Logger;
-
 public class FTPClientFactory extends BasePooledObjectFactory<FTPClient> {
     private static Logger logger = Logger.getLogger(FTPClientFactory.class);
 
@@ -27,7 +25,7 @@ public class FTPClientFactory extends BasePooledObjectFactory<FTPClient> {
     }
     @Override
     public FTPClient create() throws Exception {
-        FTPClient ftpClient = new FTPSClient();
+        FTPClient ftpClient = new FTPClient();
         ftpClient.setConnectTimeout(5000);
         try {
             ftpClient.connect(ftpPoolConfig.getHost(), ftpPoolConfig.getPort());

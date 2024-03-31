@@ -2,6 +2,7 @@ package com.example.ftl_sftl.core;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.pool2.impl.GenericObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 public class FTPClientPool {
     private GenericObjectPool<FTPClient> pool;
@@ -9,6 +10,8 @@ public class FTPClientPool {
 
     public FTPClientPool(FTPClientFactory clientFactory) {
         this.clientFactory = clientFactory;
+        GenericObjectPoolConfig<FTPClient> poolConfig = clientFactory.getFtpPoolConfig();
+        poolConfig.setMinIdle(5);
         pool = new GenericObjectPool<FTPClient>(clientFactory, clientFactory.getFtpPoolConfig());
     }
 
@@ -21,8 +24,8 @@ public class FTPClientPool {
     }
 
     public FTPClient borrowObject() throws Exception {
-        FTPClient client = pool.borrowObject();
-        return client;
+       FTPClient client = pool.borrowObject();
+       return client;
     }
 
     public void returnObject(FTPClient ftpClient) {
