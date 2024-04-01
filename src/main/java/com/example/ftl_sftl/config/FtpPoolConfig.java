@@ -1,6 +1,6 @@
 package com.example.ftl_sftl.config;
 
-import com.example.ftl_sftl.ftpClient.FtpClient;
+
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 public class FtpPoolConfig extends GenericObjectPoolConfig {

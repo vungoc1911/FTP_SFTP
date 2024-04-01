@@ -4,7 +4,7 @@ import com.example.ftl_sftl.config.FtpPoolConfig;
 import com.example.ftl_sftl.core.FTPClientFactory;
 import com.example.ftl_sftl.core.FTPClientPool;
 import com.example.ftl_sftl.core.FtpClientUtil;
-import com.example.ftl_sftl.ftpClient.FtpClient;
+import com.example.ftl_sftl.core.SFTPClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -20,10 +20,10 @@ public class FtlSftlApplication {
 //		FtpClient ftpClient = new FtpClient();
 //		ftpClient.connect();
 		SpringApplication.run(FtlSftlApplication.class, args);
-		FtpPoolConfig config = new FtpPoolConfig();
-		FTPClientFactory factory = new FTPClientFactory(config);
-		FTPClientPool pool = new FTPClientPool(factory);
-		FtpClientUtil ftpClientUtil = new FtpClientUtil(pool);
+//		FtpPoolConfig config = new FtpPoolConfig();
+//		FTPClientFactory factory = new FTPClientFactory(config);
+//		FTPClientPool pool = new FTPClientPool(factory);
+//		FtpClientUtil ftpClientUtil = new FtpClientUtil(pool);
 //		ftpClientUtil.mkdirs("/test2/");
 //		File localFile = new File("C:/Users/vungo/Documents/JS.docx") ;
 //		ftpClientUtil.store( localFile, "/test2/", "JS.docx");
@@ -32,7 +32,10 @@ public class FtlSftlApplication {
 //		String localFilePath = "G:/PROJECT_CA_NHAN/FTP_SFTP/JS.docx"; // Đường dẫn lưu trữ tệp tải về
 //		File localFile = new File(localFilePath);
 //		ftpClientUtil.retrieve(remoteFilePath, localFile);
-		ftpClientUtil.delete("/test2/JS.docx");
+//		ftpClientUtil.delete("/test2/JS.docx");
+		SFTPClient sftpClient = new SFTPClient();
+//		sftpClient.connect();
+		sftpClient.mkdirs("/home/mobaxterm/test_sftp/test/");
 	}
 
 }

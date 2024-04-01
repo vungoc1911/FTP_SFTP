@@ -1,7 +1,6 @@
 package com.example.ftl_sftl.controller;
 
 import com.example.ftl_sftl.core.FtpClientUtil;
-import com.example.ftl_sftl.ftpClient.FtpClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
