@@ -1,6 +1,5 @@
-package com.example.ftl_sftl.core;
+package com.example.ftl_sftl.core.ftp;
 
-import com.example.ftl_sftl.exception.ClientException;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.log4j.Logger;

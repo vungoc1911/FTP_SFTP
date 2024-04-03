@@ -1,4 +1,4 @@
-package com.example.ftl_sftl.core;
+package com.example.ftl_sftl.core.ftp;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.pool2.impl.GenericObjectPool;

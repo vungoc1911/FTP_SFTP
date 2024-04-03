@@ -1,4 +1,4 @@
-package com.example.ftl_sftl.core;
+package com.example.ftl_sftl.core.ftp;
 
 import com.example.ftl_sftl.config.FtpPoolConfig;
 import com.example.ftl_sftl.exception.ClientException;

@@ -1,16 +1,13 @@
 package com.example.ftl_sftl;
 
-import com.example.ftl_sftl.config.FtpPoolConfig;
-import com.example.ftl_sftl.core.FTPClientFactory;
-import com.example.ftl_sftl.core.FTPClientPool;
-import com.example.ftl_sftl.core.FtpClientUtil;
-import com.example.ftl_sftl.core.SFTPClient;
+import com.example.ftl_sftl.config.SFTPConfig;
+import com.example.ftl_sftl.core.sftp.SFTPClientFactory;
+import com.example.ftl_sftl.core.sftp.SFTPClientPool;
+import com.example.ftl_sftl.core.sftp.SFTPClientUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
 
 @SpringBootApplication
 public class FtlSftlApplication {
@@ -33,9 +30,22 @@ public class FtlSftlApplication {
 //		File localFile = new File(localFilePath);
 //		ftpClientUtil.retrieve(remoteFilePath, localFile);
 //		ftpClientUtil.delete("/test2/JS.docx");
-		SFTPClient sftpClient = new SFTPClient();
-//		sftpClient.connect();
-		sftpClient.mkdirs("/home/mobaxterm/test_sftp/test/");
+
+
+		SFTPConfig config = new SFTPConfig();
+		SFTPClientFactory factory = new SFTPClientFactory(config);
+		SFTPClientPool pool = new SFTPClientPool(factory);
+		SFTPClientUtil client = new SFTPClientUtil(pool);
+//		sftpClient1.connect();
+//		client.mkdirs("/test/");
+//		File localFile = new File("C:/Users/ngocvt20.FSOFT.FPT.VN/Documents/DeNghiCapVTTB.vm");
+//		client.store(localFile, "/test/", "DeNghiCapVTTB.vm");
+
+//		String remote = "/home/mobaxterm/test/DeNghiCapVTTB.vm";
+//		String localFile = "C:/Users/ngocvt20.FSOFT.FPT.VN/Documents/DeNghiCapVTTB.vm";
+//		File file = new File(localFile);
+//		client.retrieve(remote, file);
+		client.delete("/home/mobaxterm/test/DeNghiCapVTTB.vm");
 	}
 
 }
