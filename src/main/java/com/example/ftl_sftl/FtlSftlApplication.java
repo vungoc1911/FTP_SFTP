@@ -8,10 +8,12 @@ import com.example.ftl_sftl.core.ftp.FtpClientUtil;
 import com.example.ftl_sftl.core.sftp.SFTPClientFactory;
 import com.example.ftl_sftl.core.sftp.SFTPClientPool;
 import com.example.ftl_sftl.core.sftp.SFTPClientUtil;
+import com.example.ftl_sftl.core.telnet.TelnetClientUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.File;
+import java.io.IOException;
 
 @SpringBootApplication
 public class FtlSftlApplication {
@@ -20,7 +22,7 @@ public class FtlSftlApplication {
 
 //		FtpClient ftpClient = new FtpClient();
 //		ftpClient.connect();
-//		SpringApplication.run(FtlSftlApplication.class, args);
+		SpringApplication.run(FtlSftlApplication.class, args);
 //		FtpPoolConfig config = new FtpPoolConfig();
 //		FTPClientFactory factory = new FTPClientFactory(config);
 //		FTPClientPool pool = new FTPClientPool(factory);
@@ -35,13 +37,13 @@ public class FtlSftlApplication {
 //		ftpClientUtil.retrieve(remoteFilePath, localFile);
 //		ftpClientUtil.delete("/test2/JS.docx");
 
-
-		SFTPConfig config = new SFTPConfig();
-		SFTPClientFactory factory = new SFTPClientFactory(config);
-		SFTPClientPool pool = new SFTPClientPool(factory);
-		SFTPClientUtil client = new SFTPClientUtil(pool);
-		client.mkdirs("/test/");
-		client.mkdirs("/test2/");
+//
+//		SFTPConfig config = new SFTPConfig();
+//		SFTPClientFactory factory = new SFTPClientFactory(config);
+//		SFTPClientPool pool = new SFTPClientPool(factory);
+//		SFTPClientUtil client = new SFTPClientUtil(pool);
+//		client.mkdirs("/test/");
+//		client.mkdirs("/test2/");
 //		File localFile = new File("C:/Users/ngocvt20.FSOFT.FPT.VN/Documents/DeNghiCapVTTB.vm");
 //		client.store(localFile, "/test/", "DeNghiCapVTTB.vm");
 
@@ -50,6 +52,8 @@ public class FtlSftlApplication {
 //		File file = new File(localFile);
 //		client.retrieve(remote, file);
 //		client.delete("/home/mobaxterm/test/DeNghiCapVTTB.vm");
+		TelnetClientUtil telnetClientUtil = new TelnetClientUtil();
+		telnetClientUtil.sendCommand("10.15.175.20", 23, "");
+		telnetClientUtil.sendCommand("10.15.175.20", 23, "ls");
 	}
-
 }
