@@ -5,10 +5,10 @@ import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 public class FtpPoolConfig extends GenericObjectPoolConfig {
 
-    private String host = "192.168.0.102";
+    private String host = "10.15.24.51";
     private int port = 21;
-    private String username = "admin";
-    private String password = "admin";
+    private String username = "ftp01";
+    private String password = "ftp01";
     private int connectTimeOut = 5000;
     private String controlEncoding = "utf-8";
     private int bufferSize = 1024;
