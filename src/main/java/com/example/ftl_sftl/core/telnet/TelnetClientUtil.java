@@ -3,48 +3,72 @@ package com.example.ftl_sftl.core.telnet;
 import org.apache.commons.net.telnet.TelnetClient;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.net.SocketTimeoutException;
 
 @Service
 public class TelnetClientUtil {
-    private final TelnetClient telnetClient;
-    private InputStream inputStream;
-    private PrintStream outputStream;
+    private final String telnetServerHost = "10.15.175.20";
+    private final int telnetServerPort = 23;
 
-    public TelnetClientUtil() {
-        telnetClient = new TelnetClient();
-    }
-
-    public String sendCommand(String serverAddress, int port, String command) throws IOException {
+    public void connectAnExecuteCommand(String command) {
         try {
-            telnetClient.connect(serverAddress, port);
-            inputStream = telnetClient.getInputStream();
-            outputStream = new PrintStream(telnetClient.getOutputStream());
+            TelnetClient telnetClient = new TelnetClient();
+            telnetClient.connect(telnetServerHost, telnetServerPort);
+            telnetClient.setSoTimeout(100000);
 
-            outputStream.println(command);
-            outputStream.flush();
-            String response = readResponse(); // Store the response
-            System.out.println(response); // Print the stored response
-            return response; // Return the stored response
-        } finally {
-            if (telnetClient.isConnected()) {
-                telnetClient.disconnect();
-            }
+            InputStream inputStream = telnetClient.getInputStream();
+            PrintStream outputStream = new PrintStream(telnetClient.getOutputStream());
+
+            sendCommand(command, outputStream);
+            String response = readResponse(inputStream);
+
+            handleResponse(response);
+
+            telnetClient.disconnect();
+        } catch (SocketTimeoutException e) {
+            handleTimeout();
+        } catch (IOException e) {
+            handleIOError(e);
         }
     }
 
-    private String readResponse() throws IOException {
-        StringBuilder response = new StringBuilder();
-        byte[] buffer = new byte[1024];
-        int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1) {
-            response.append(new String(buffer, 0, bytesRead));
-        }
-        return response.toString();
+    private String readResponse(InputStream inputStream) throws IOException {
+       BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+       StringBuilder response = new StringBuilder();
+       String line;
+       while ((line = reader.readLine()) != null) {
+           response.append(line).append("\n");
+           if (line.contains("/home/mobaxterm")) {
+               break; // Kết thúc việc đọc dữ liệu
+           }
+       }
+       reader.close();
+       return response.toString();
+
+//        byte[] buffer = new byte[1024];
+//        int bytesRead;
+//        StringBuilder response = new StringBuilder();
+//        while ((bytesRead = inputStream.read(buffer)) != -1) {
+//            response.append(new String(buffer, 0, bytesRead));
+//        }
+//        return response.toString();
     }
-    public void disconnect() throws IOException {
-        telnetClient.disconnect();
+    private void sendCommand(String command, PrintStream outputStream) {
+        outputStream.println("");
+        outputStream.flush();
+
+        outputStream.println(command);
+        outputStream.flush();
+    }
+    private void handleResponse(String response) {
+        System.out.println("Phản hồi từ máy chủ Telnet: " + response);
+    }
+    private void handleTimeout() {
+        System.err.println("Hết thời gian chờ khi đợi phản hồi từ máy chủ Telnet.");
+    }
+
+    private void handleIOError(IOException e) {
+        e.printStackTrace();
     }
 }

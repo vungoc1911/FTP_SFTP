@@ -53,7 +53,7 @@ public class FtlSftlApplication {
 //		client.retrieve(remote, file);
 //		client.delete("/home/mobaxterm/test/DeNghiCapVTTB.vm");
 		TelnetClientUtil telnetClientUtil = new TelnetClientUtil();
-		telnetClientUtil.sendCommand("10.15.175.20", 23, "");
-		telnetClientUtil.sendCommand("10.15.175.20", 23, "ls");
+//		telnetClientUtil.connectAnExecuteCommand("123");
+		telnetClientUtil.connectAnExecuteCommand("ls");
 	}
 }
